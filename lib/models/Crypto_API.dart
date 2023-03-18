@@ -6,11 +6,17 @@ import 'package:http/http.dart' as http;
 class CryptoApi {
   static Future<List<dynamic>> getMarket() async {
     // List<CruptoCurrency> markets = [];
-    Uri requestPath = Uri.parse(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=20&page=1&sparkline=false");
+    try {
+      Uri requestPath = Uri.parse(
+          "https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=20&page=1&sparkline=false");
 
-    var response = await http.get(requestPath);
-    var decodedResponse = jsonDecode(response.body);
+      var response = await http.get(requestPath);
+      var decodedResponse = jsonDecode(response.body);
+      List<dynamic> markets = decodedResponse as List<dynamic>;
+      return markets;
+    } catch (e) {
+      return [];
+    }
 
     // if (response.statusCode == 200) {
     //   print("code found yee");
@@ -22,8 +28,5 @@ class CryptoApi {
     //   print("nahi aya");
     //   return markets;
     // }
-
-    List<dynamic> markets = decodedResponse as List<dynamic>;
-    return markets;
   }
 }
