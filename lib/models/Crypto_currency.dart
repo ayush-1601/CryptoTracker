@@ -7,7 +7,7 @@ class CruptoCurrency {
   int? marketCap;
   int? marketCapRank;
   int? fullyDilutedValuation;
-  int? totalVolume;
+  double? totalVolume;
   double? high24H;
   double? low24H;
   double? priceChange24H;
@@ -64,7 +64,7 @@ class CruptoCurrency {
         marketCap: json["market_cap"],
         marketCapRank: json["market_cap_rank"],
         fullyDilutedValuation: json["fully_diluted_valuation"],
-        totalVolume: json["total_volume"],
+        totalVolume: double.parse(json["total_volume"].toString()),
         high24H: double.parse(json["high_24h"].toString()),
         low24H: double.parse(json["low_24h"].toString()),
         priceChange24H: double.parse(json["price_change_24h"].toString()),

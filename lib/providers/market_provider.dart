@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_crypto_tracker/models/Crypto_API.dart';
 import 'package:flutter_crypto_tracker/models/Crypto_currency.dart';
@@ -23,5 +25,10 @@ class MarketProvider with ChangeNotifier {
     markets = temp;
     isLoading = false;
     notifyListeners();
+
+    Timer(const Duration(seconds: 3), () {
+      fetchData();
+      print("data updated");
+    });
   }
 }
