@@ -39,8 +39,8 @@ class _HomePageState extends State<HomePage> {
                     },
                     padding: EdgeInsets.all(0),
                     icon: (themeProvider.themeMode == ThemeMode.light)
-                        ? Icon(Icons.dark_mode)
-                        : Icon(Icons.light_mode))
+                        ? const Icon(Icons.dark_mode)
+                        : const Icon(Icons.light_mode))
               ],
             ),
             SizedBox(
@@ -77,12 +77,10 @@ class _HomePageState extends State<HomePage> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                "INR " +
-                                    currentCrypto.currentPrice!
-                                        .toStringAsFixed(4),
-                                style: TextStyle(
+                                "INR ${currentCrypto.currentPrice!.toStringAsFixed(4)}",
+                                style: const TextStyle(
                                     fontSize: 18,
-                                    color: Color.fromARGB(255, 4, 70, 123),
+                                    color: Color.fromARGB(255, 20, 99, 163),
                                     fontWeight: FontWeight.bold),
                               ),
                               Builder(builder: (context) {
@@ -93,12 +91,12 @@ class _HomePageState extends State<HomePage> {
 
                                 if (priceChange < 0) {
                                   return Text(
-                                    "${priceChangePercentage.toStringAsFixed(2)} (${priceChange.toStringAsFixed(4)})",
+                                    "${priceChangePercentage.toStringAsFixed(2)}% (${priceChange.toStringAsFixed(4)})",
                                     style: TextStyle(color: Colors.red),
                                   );
                                 } else {
                                   return Text(
-                                    "+${priceChangePercentage.toStringAsFixed(2)} (+${priceChange.toStringAsFixed(4)})",
+                                    "+${priceChangePercentage.toStringAsFixed(2)}% (+${priceChange.toStringAsFixed(4)})",
                                     style: TextStyle(color: Colors.green),
                                   );
                                 }
