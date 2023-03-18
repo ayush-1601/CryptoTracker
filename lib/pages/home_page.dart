@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_crypto_tracker/models/Crypto_currency.dart';
 import 'package:flutter_crypto_tracker/providers/market_provider.dart';
+import 'package:flutter_crypto_tracker/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,6 +16,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider =
+        Provider.of<ThemeProvider>(context, listen: false);
+
     return Scaffold(
       body: SafeArea(
           child: Container(
@@ -22,9 +26,22 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Crypto Today",
-              style: TextStyle(fontSize: 50, fontWeight: FontWeight.w500),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Crypto Today",
+                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.w500),
+                ),
+                IconButton(
+                    onPressed: () {
+                      themeProvider.toggleTheme();
+                    },
+                    padding: EdgeInsets.all(0),
+                    icon: (themeProvider.themeMode == ThemeMode.light)
+                        ? Icon(Icons.dark_mode)
+                        : Icon(Icons.light_mode))
+              ],
             ),
             SizedBox(
               height: 20,
