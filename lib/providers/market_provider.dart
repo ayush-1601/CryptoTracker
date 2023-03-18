@@ -3,15 +3,19 @@ import 'package:flutter_crypto_tracker/models/Crypto_API.dart';
 import 'package:flutter_crypto_tracker/models/Crypto_currency.dart';
 
 class MarketProvider with ChangeNotifier {
-  bool isLoading = false;
+  bool isLoading = true;
   List<CruptoCurrency> markets = [];
 
+  MarketProvider() {
+    fetchData();
+  }
+
   void fetchData() async {
-    List<dynamic> _markets = await CryptoApi.getMarket();
+    List<dynamic> _market = await CryptoApi.getMarket();
 
     List<CruptoCurrency> temp = [];
 
-    for (var market in _markets) {
+    for (dynamic market in _market) {
       CruptoCurrency newCrypto = CruptoCurrency.fromJson(market);
       temp.add(newCrypto);
     }

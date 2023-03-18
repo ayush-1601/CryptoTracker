@@ -3,21 +3,21 @@ class CruptoCurrency {
   String? symbol;
   String? name;
   String? image;
-  int? currentPrice;
+  double? currentPrice;
   int? marketCap;
   int? marketCapRank;
   int? fullyDilutedValuation;
   int? totalVolume;
-  int? high24H;
-  int? low24H;
+  double? high24H;
+  double? low24H;
   double? priceChange24H;
   double? priceChangePercentage24H;
   double? marketCapChange24H;
   double? marketCapChangePercentage24H;
-  int? circulatingSupply;
-  int? totalSupply;
-  int? maxSupply;
-  int? ath;
+  double? circulatingSupply;
+  double? totalSupply;
+  double? maxSupply;
+  double? ath;
   double? athChangePercentage;
   String? athDate;
   double? atl;
@@ -60,25 +60,30 @@ class CruptoCurrency {
         symbol: json["symbol"],
         name: json["name"],
         image: json["image"],
-        currentPrice: json["current_price"],
+        currentPrice: double.parse(json["current_price"].toString()),
         marketCap: json["market_cap"],
         marketCapRank: json["market_cap_rank"],
         fullyDilutedValuation: json["fully_diluted_valuation"],
         totalVolume: json["total_volume"],
-        high24H: json["high_24h"],
-        low24H: json["low_24h"],
-        priceChange24H: json["price_change_24h"],
-        priceChangePercentage24H: json["price_change_percentage_24h"],
-        marketCapChange24H: json["market_cap_change_24h"],
-        marketCapChangePercentage24H: json["market_cap_change_percentage_24h"],
-        circulatingSupply: json["circulating_supply"],
+        high24H: double.parse(json["high_24h"].toString()),
+        low24H: double.parse(json["low_24h"].toString()),
+        priceChange24H: double.parse(json["price_change_24h"].toString()),
+        priceChangePercentage24H:
+            double.parse(json["price_change_percentage_24h"].toString()),
+        marketCapChange24H:
+            double.parse(json["market_cap_change_24h"].toString()),
+        marketCapChangePercentage24H:
+            double.parse(json["market_cap_change_percentage_24h"].toString()),
+        circulatingSupply: double.parse(json["circulating_supply"].toString()),
         totalSupply: json["total_supply"],
         maxSupply: json["max_supply"],
-        ath: json["ath"],
-        athChangePercentage: json["ath_change_percentage"],
+        ath: double.parse(json["ath"].toString()),
+        athChangePercentage:
+            double.parse(json["ath_change_percentage"].toString()),
         athDate: json["ath_date"],
-        atl: json["atl"],
-        atlChangePercentage: json["atl_change_percentage"],
+        atl: double.parse(json["atl"].toString()),
+        atlChangePercentage:
+            double.parse(json["atl_change_percentage"].toString()),
         atlDate: json["atl_date"],
         roi: json["roi"],
         lastUpdated: json["last_updated"]);
