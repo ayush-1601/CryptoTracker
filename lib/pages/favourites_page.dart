@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_crypto_tracker/models/Crypto_currency.dart';
 import 'package:flutter_crypto_tracker/providers/market_provider.dart';
+import 'package:flutter_crypto_tracker/widgets/market_list_tile.dart';
 import 'package:provider/provider.dart';
 
 class Favourites extends StatefulWidget {
@@ -18,7 +19,23 @@ class _FavouritesState extends State<Favourites> {
           .where((element) => element.isFavourite == true)
           .toList();
 
-      return Text(favorites.length.toString());
+      if (favorites.isNotEmpty) {
+        return ListView.builder(
+          itemCount: favorites.length,
+          itemBuilder: (BuildContext context, int index) {
+            CruptoCurrency currentCrypto = favorites[index];
+            return MarketTile(currentCrypto: currentCrypto);
+          },
+        );
+      } else {
+        return Center(
+          child: Text(
+            "No Favourites Yet!!",
+            style: TextStyle(
+                color: Color.fromARGB(255, 92, 99, 102), fontSize: 20),
+          ),
+        );
+      }
     });
   }
 }
