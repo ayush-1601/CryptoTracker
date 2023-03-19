@@ -50,8 +50,32 @@ class _MarketListState extends State<MarketList> {
                     backgroundColor: Colors.white,
                     backgroundImage: NetworkImage(currentCrypto.image!),
                   ),
-                  title: Text(currentCrypto.name! +
-                      " #${currentCrypto.marketCapRank!}"),
+                  title: Row(
+                    children: [
+                      Flexible(
+                          child: Text(
+                        currentCrypto.name!,
+                        overflow: TextOverflow.ellipsis,
+                      )),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      (currentCrypto.isFavourite == false)
+                          ? GestureDetector(
+                              onTap: () {
+                                marketProvider.addFavorites(currentCrypto);
+                              },
+                              child: Icon(Icons.favorite_border_rounded))
+                          : GestureDetector(
+                              onTap: () {
+                                marketProvider.removeFavorites(currentCrypto);
+                              },
+                              child: Icon(
+                                Icons.favorite_rounded,
+                                color: Colors.red,
+                              ))
+                    ],
+                  ),
                   subtitle: Text(currentCrypto.symbol!.toUpperCase()),
                   trailing: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
