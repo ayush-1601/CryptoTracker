@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_crypto_tracker/constants/theme.dart';
 import 'package:flutter_crypto_tracker/models/local_storage.dart';
+import 'package:flutter_crypto_tracker/pages/chart_page.dart';
 import 'package:flutter_crypto_tracker/pages/home_page.dart';
 import 'package:flutter_crypto_tracker/providers/market_provider.dart';
 import 'package:flutter_crypto_tracker/providers/theme_provider.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
             themeMode: themeProvider.themeMode,
             theme: lightTheme,
             darkTheme: darkTheme,
-            home: HomePage(),
+            home: ChartPage(),
           );
         }));
   }

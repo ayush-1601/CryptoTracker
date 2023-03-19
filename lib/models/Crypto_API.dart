@@ -29,4 +29,18 @@ class CryptoApi {
     //   return markets;
     // }
   }
+
+  Future<List<dynamic>> getChart(String cid) async {
+    try {
+      Uri requestPath = Uri.parse(
+          "https://api.coingecko.com/api/v3/coins/${cid}/market_chart?vs_currency=inr&days=7");
+
+      var response = await http.get(requestPath);
+      var decodedResponse = jsonDecode(response.body);
+      List<dynamic> charts = decodedResponse as List<dynamic>;
+      return charts;
+    } catch (e) {
+      return [];
+    }
+  }
 }
