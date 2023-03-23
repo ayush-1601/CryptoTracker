@@ -29,7 +29,7 @@ class _MarketListState extends State<MarketList> {
               await marketProvider.fetchData();
             },
             child: ListView.builder(
-              physics: BouncingScrollPhysics(
+              physics: const BouncingScrollPhysics(
                   parent: AlwaysScrollableScrollPhysics()),
               itemCount: marketProvider.markets.length,
               itemBuilder: (BuildContext context, int index) {

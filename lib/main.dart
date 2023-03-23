@@ -6,6 +6,7 @@ import 'package:flutter_crypto_tracker/pages/home_page.dart';
 import 'package:flutter_crypto_tracker/providers/market_provider.dart';
 import 'package:flutter_crypto_tracker/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
             themeMode: themeProvider.themeMode,
             theme: lightTheme,
             darkTheme: darkTheme,
-            home: ChartPage(),
+            home: HomePage(),
           );
         }));
   }

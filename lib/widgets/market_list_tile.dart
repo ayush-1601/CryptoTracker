@@ -13,80 +13,117 @@ class MarketTile extends StatelessWidget {
   Widget build(BuildContext context) {
     MarketProvider marketProvider =
         Provider.of<MarketProvider>(context, listen: false);
-    return ListTile(
-      onTap: (() {
-        Navigator.push(
-            context,
-            CupertinoPageRoute(
-                builder: (context) => DetailsPage(
-                      id: currentCrypto.id!,
-                    )));
-      }),
-      // shape: RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.circular(10)),
-      // tileColor: Color.fromARGB(255, 39, 41, 50),
-      contentPadding: EdgeInsets.all(0),
-      leading: CircleAvatar(
-        backgroundColor: Colors.white,
-        backgroundImage: NetworkImage(currentCrypto.image!),
-      ),
-      title: Row(
-        children: [
-          Flexible(
-              child: Text(
-            currentCrypto.name!,
-            overflow: TextOverflow.ellipsis,
-          )),
-          SizedBox(
-            width: 10,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                CupertinoPageRoute(
+                    builder: (context) => DetailsPage(
+                          id: currentCrypto.id!,
+                        )));
+          },
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.11,
+            width: MediaQuery.of(context).size.width * 0.80,
+            child: Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 18,
+                          backgroundColor: Colors.transparent,
+                          backgroundImage: NetworkImage(currentCrypto.image!),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Flexible(
+                                child: Text(
+                              currentCrypto.name!,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(fontSize: 15),
+                            )),
+
+                            Text(
+                              "₹ ${currentCrypto.currentPrice!.toStringAsFixed(2)}",
+                              style: const TextStyle(
+                                  fontSize: 15,
+                                  // color: Color.fromARGB(255, 20, 99, 163),
+                                  fontWeight: FontWeight.bold),
+                            ),
+
+                            // Text(currentCrypto.symbol!.toUpperCase()),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Builder(builder: (context) {
+                          double priceChange = currentCrypto.priceChange24H!;
+                          double priceChangePercentage =
+                              currentCrypto.priceChangePercentage24H!;
+
+                          if (priceChange < 0) {
+                            return Text(
+                              "₹ ${priceChange.toStringAsFixed(2)} | ${priceChangePercentage.toStringAsFixed(2)}%",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold),
+                            );
+                          } else {
+                            return Text(
+                              "₹ ${priceChange.toStringAsFixed(2)} | ${priceChangePercentage.toStringAsFixed(2)}%",
+                              style: const TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold),
+                            );
+                          }
+                        })
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
-          (currentCrypto.isFavourite == false)
+        ),
+        Container(
+          child: (currentCrypto.isFavourite == false)
               ? GestureDetector(
                   onTap: () {
                     marketProvider.addFavorites(currentCrypto);
                   },
-                  child: Icon(Icons.favorite_border_rounded))
+                  child: Icon(
+                    Icons.favorite_outline,
+                  ))
               : GestureDetector(
                   onTap: () {
                     marketProvider.removeFavorites(currentCrypto);
                   },
                   child: Icon(
-                    Icons.favorite_rounded,
+                    Icons.favorite_outline_outlined,
                     color: Colors.red,
-                  ))
-        ],
-      ),
-      subtitle: Text(currentCrypto.symbol!.toUpperCase()),
-      trailing: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Text(
-            "INR ${currentCrypto.currentPrice!.toStringAsFixed(4)}",
-            style: const TextStyle(
-                fontSize: 18,
-                color: Color.fromARGB(255, 20, 99, 163),
-                fontWeight: FontWeight.bold),
-          ),
-          Builder(builder: (context) {
-            double priceChange = currentCrypto.priceChange24H!;
-            double priceChangePercentage =
-                currentCrypto.priceChangePercentage24H!;
-
-            if (priceChange < 0) {
-              return Text(
-                "${priceChangePercentage.toStringAsFixed(2)}% (${priceChange.toStringAsFixed(4)})",
-                style: TextStyle(color: Colors.red),
-              );
-            } else {
-              return Text(
-                "+${priceChangePercentage.toStringAsFixed(2)}% (+${priceChange.toStringAsFixed(4)})",
-                style: TextStyle(color: Colors.green),
-              );
-            }
-          })
-        ],
-      ),
+                  )),
+        ),
+      ],
     );
   }
 }

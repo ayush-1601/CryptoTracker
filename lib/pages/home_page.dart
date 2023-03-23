@@ -35,16 +35,32 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return Scaffold(
       body: SafeArea(
           child: Container(
-        padding: EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 0),
+        padding: EdgeInsets.only(top: 0, left: 20, right: 20, bottom: 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Crypto Today",
-                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.w500),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text(
+                      "Crypto",
+                      style: TextStyle(
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 8),
+                    ),
+                    Text(
+                      "Today",
+                      style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 8),
+                    ),
+                  ],
                 ),
                 IconButton(
                     onPressed: () {
@@ -56,23 +72,30 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         : const Icon(Icons.light_mode))
               ],
             ),
-            SizedBox(
-              height: 20,
+            const SizedBox(
+              height: 5,
             ),
-            TabBar(controller: viewController, tabs: [
-              Tab(
-                child: Text(
-                  "Markets",
-                  style: Theme.of(context).textTheme.bodyText1,
+            TabBar(
+              controller: viewController,
+              tabs: [
+                Tab(
+                  child: Text(
+                    "Markets",
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
                 ),
-              ),
-              Tab(
-                child: Text(
-                  "Favourites",
-                  style: Theme.of(context).textTheme.bodyText1,
+                Tab(
+                  child: Text(
+                    "Favourites",
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
                 ),
-              )
-            ]),
+              ],
+              
+            ),
+            const SizedBox(
+              height: 10,
+            ),
             Expanded(
               child: TabBarView(
                   physics: BouncingScrollPhysics(
